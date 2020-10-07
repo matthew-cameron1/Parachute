@@ -1,0 +1,12 @@
+{
+  "types": [
+    {
+      "name": "game",
+      "min-port": 2000,
+      "max-port": 4000,
+      "args": [
+        "./run.sh"
+      ]
+    }
+  ]
+}

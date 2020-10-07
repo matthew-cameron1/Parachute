@@ -1,0 +1,4 @@
+name: Parachute
+main: ca.innov8solutions.parachute.ParachutePlugin
+author: [MaTTHD]
+version: 1.0-SNAPSHOT

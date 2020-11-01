@@ -9,6 +9,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import net.md_5.bungee.api.plugin.Command;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.File;
 
@@ -25,13 +27,20 @@ public class ParachuteModule extends AbstractModule {
 
         bind(ParachutePlugin.class).toInstance(plugin);
 
-        bind(ParachuteController.class).toInstance(new LParachuteController("game", plugin.getTypeByName("game")));
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(128);
+        JedisPool pool = new JedisPool(config);
+
+        bind(JedisPool.class).toInstance(pool);
+
+        requestInjection(plugin);
+
+        bind(ParachuteController.class).toInstance(new LParachuteController(plugin,"game", plugin.getTypeByName("game")));
 
         bind(File.class).annotatedWith(Names.named("appDir")).toInstance(new File("/home/parachute/"));
 
         Multibinder<Command> commandMultibinder = Multibinder.newSetBinder(binder(), Command.class);
         commandMultibinder.addBinding().toInstance(new DeployCommand("deploy"));
 
-        requestInjection(plugin);
     }
 }

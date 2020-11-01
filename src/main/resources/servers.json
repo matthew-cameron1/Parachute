@@ -2,6 +2,8 @@
   "types": [
     {
       "name": "game",
+      "maxInstances": 10,
+      "minInstances": 1,
       "min-port": 2000,
       "max-port": 4000,
       "args": [

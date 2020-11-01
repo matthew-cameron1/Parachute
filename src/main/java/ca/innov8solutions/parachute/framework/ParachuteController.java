@@ -24,6 +24,7 @@ public abstract class ParachuteController {
     public abstract boolean exists();
     public abstract boolean destroy();
     public abstract List<String> getIps();
+    public abstract List<ParachuteServer> getServers();
 
     public ServerType getType() {
         return type;
